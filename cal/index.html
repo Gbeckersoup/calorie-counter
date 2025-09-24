@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calorie Counter</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Calorie Counter</h1>
+    <button id="installBtn" class="ghost" hidden>Install</button>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Today's Summary (<span id="dateLabel"></span>)</h2>
+      <div class="summary">
+        <div><strong>Total:</strong> <span id="totalCals">0</span> kcal</div>
+        <div><strong>Goal:</strong> <span id="goalCals">—</span> kcal</div>
+        <div><strong>Remaining:</strong> <span id="remainingCals">—</span> kcal</div>
+      </div>
+      <div class="progress">
+        <div id="bar"></div>
+      </div>
+      <div class="row">
+        <label>Daily Goal (kcal)</label>
+        <input type="number" id="goalInput" min="0" placeholder="e.g., 1700">
+        <button id="saveGoal">Save Goal</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Add Entry</h2>
+      <div class="row">
+        <label>Food</label>
+        <input type="text" id="food" placeholder="e.g., Chicken breast">
+      </div>
+      <div class="row">
+        <label>Calories (kcal)</label>
+        <input type="number" id="calories" min="0" placeholder="e.g., 250">
+      </div>
+      <div class="row three">
+        <div>
+          <label>Protein (g)</label>
+          <input type="number" id="protein" min="0" placeholder="0">
+        </div>
+        <div>
+          <label>Carbs (g)</label>
+          <input type="number" id="carbs" min="0" placeholder="0">
+        </div>
+        <div>
+          <label>Fat (g)</label>
+          <input type="number" id="fat" min="0" placeholder="0">
+        </div>
+      </div>
+      <div class="row">
+        <label>Date</label>
+        <input type="date" id="entryDate">
+      </div>
+      <div class="row">
+        <button id="add">Add</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Entries</h2>
+      <div class="controls">
+        <input type="date" id="filterDate">
+        <button id="todayBtn">Today</button>
+        <button id="clearAll" class="danger">Clear Day</button>
+      </div>
+      <ul id="list"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Backup / Restore</h2>
+      <div class="row">
+        <button id="exportBtn">Export Data (JSON)</button>
+        <input type="file" id="importFile" accept="application/json">
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Works offline. Data stays on your device.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
